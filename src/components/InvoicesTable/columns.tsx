@@ -6,7 +6,8 @@ export const columns: ColumnDef<Invoice>[] = [
   {
     accessorKey: 'invoice',
     header: '#',
-    size: 50,
+    size: 80,
+    enableResizing: false,
   },
   {
     accessorKey: 'paymentStatus',
