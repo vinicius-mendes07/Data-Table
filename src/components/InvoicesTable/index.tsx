@@ -7,17 +7,59 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { invoices } from './data';
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { CreditCard } from 'lucide-react';
 
 export function InvoicesTable() {
+  const table = useReactTable({
+    data: invoices,
+    columns: [
+      {
+        accessorKey: 'invoice',
+        header: '#',
+      },
+      {
+        accessorKey: 'paymentStatus',
+        header: () => (
+          <div className="flex items-center">
+            <CreditCard className="size-4" />
+            Payment Status
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'paymentMethod',
+        header: 'Payment Method',
+      },
+      {
+        accessorKey: 'totalAmount',
+        header: 'Total',
+      },
+    ],
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  console.log(table);
+  console.log(table.getHeaderGroups());
   return (
     <Table>
       <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <TableHead key={header.id}>
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext(),
+                )}
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
       </TableHeader>
       <TableBody>
         {invoices.map((invoice) => (
