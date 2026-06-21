@@ -19,13 +19,18 @@ export function InvoicesTable() {
     data: invoices,
     columns: [
       {
-        accessorKey: 'invoice',
-        header: '#',
+        header: 'Order',
+        columns: [
+          {
+            accessorKey: 'invoice',
+            header: '#',
+          },
+        ],
       },
       {
         accessorKey: 'paymentStatus',
         header: () => (
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <CreditCard className="size-4" />
             Payment Status
           </div>
@@ -43,19 +48,18 @@ export function InvoicesTable() {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  console.log(table);
-  console.log(table.getHeaderGroups());
   return (
     <Table>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <TableHead key={header.id}>
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext(),
-                )}
+              <TableHead key={header.id} colSpan={header.colSpan}>
+                {!header.isPlaceholder &&
+                  flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
               </TableHead>
             ))}
           </TableRow>
