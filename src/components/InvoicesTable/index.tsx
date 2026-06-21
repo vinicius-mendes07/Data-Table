@@ -19,13 +19,8 @@ export function InvoicesTable() {
     data: invoices,
     columns: [
       {
-        header: 'Order',
-        columns: [
-          {
-            accessorKey: 'invoice',
-            header: '#',
-          },
-        ],
+        accessorKey: 'invoice',
+        header: '#',
       },
       {
         accessorKey: 'paymentStatus',
@@ -66,12 +61,13 @@ export function InvoicesTable() {
         ))}
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {table.getRowModel().rows.map((row) => (
+          <TableRow key={row.id}>
+            {row.getAllCells().map((cell) => (
+              <TableCell key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </TableCell>
+            ))}
           </TableRow>
         ))}
       </TableBody>
