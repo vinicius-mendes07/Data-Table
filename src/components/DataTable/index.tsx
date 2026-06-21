@@ -10,14 +10,15 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  type ColumnDef,
 } from '@tanstack/react-table';
 
-interface IDataTableProps {
-  data: any[];
-  columns: any[];
+interface IDataTableProps<TData> {
+  data: TData[];
+  columns: ColumnDef<TData>[];
 }
 
-export function DataTable({ data, columns }: IDataTableProps) {
+export function DataTable<TData>({ data, columns }: IDataTableProps<TData>) {
   const table = useReactTable({
     data,
     columns,

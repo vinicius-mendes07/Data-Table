@@ -1,6 +1,8 @@
+import type { Invoice } from '@/entities/Invoice';
+import type { ColumnDef } from '@tanstack/react-table';
 import { CreditCard } from 'lucide-react';
 
-export const columns = [
+export const columns: ColumnDef<Invoice>[] = [
   {
     accessorKey: 'invoice',
     header: '#',
