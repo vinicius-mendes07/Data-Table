@@ -2,12 +2,12 @@ import { flexRender, type Table } from '@tanstack/react-table';
 import { TableBody, TableCell, TableRow } from '../ui/table';
 import { memo } from 'react';
 
-export function DataTableBody({ table }: { table: Table<any> }) {
+export function DataTableBody<TData>({ table }: { table: Table<TData> }) {
   return (
     <TableBody>
       {table.getRowModel().rows.map((row) => (
         <TableRow key={row.id}>
-          {row.getAllCells().map((cell) => (
+          {row.getVisibleCells().map((cell) => (
             <TableCell
               key={cell.id}
               style={{ width: `calc(var(--col-${cell.column.id}-size) * 1px)` }}
@@ -21,4 +21,6 @@ export function DataTableBody({ table }: { table: Table<any> }) {
   );
 }
 
-export const MemoizedDataTableBody = memo(DataTableBody);
+export const MemoizedDataTableBody = memo(
+  DataTableBody,
+) as typeof DataTableBody;
