@@ -1,6 +1,13 @@
 import type { Invoice } from '@/entities/Invoice';
 import type { ColumnDef } from '@tanstack/react-table';
-import { CreditCard } from 'lucide-react';
+import { CreditCard, Edit2Icon, EllipsisIcon, Trash2Icon } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
 
 export const columns: ColumnDef<Invoice>[] = [
   {
@@ -29,5 +36,44 @@ export const columns: ColumnDef<Invoice>[] = [
     accessorKey: 'totalAmount',
     header: 'Total',
     meta: { nameInFilters: 'Total' },
+  },
+  {
+    id: 'actions',
+    size: 80,
+    enableColumnFilter: false,
+    enableGlobalFilter: false,
+    enableHiding: false,
+    enableResizing: false,
+    enableSorting: false,
+    enableMultiSort: false,
+    cell: ({ row }) => {
+      const invoice = row.original;
+      return (
+        <div className="flex justify-end">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <EllipsisIcon className="size-4" />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuItem
+                onSelect={() => alert(`Edit ${invoice.invoice}`)}
+              >
+                <Edit2Icon className="size-4" />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onSelect={() => alert(`Delete ${invoice.invoice}`)}
+              >
+                <Trash2Icon className="size-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      );
+    },
   },
 ];
