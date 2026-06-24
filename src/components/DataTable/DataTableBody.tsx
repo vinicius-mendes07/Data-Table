@@ -1,8 +1,11 @@
-import { flexRender, type Table } from '@tanstack/react-table';
+import { flexRender } from '@tanstack/react-table';
 import { TableBody, TableCell, TableRow } from '../ui/table';
 import { memo } from 'react';
+import { useDataTable } from './DataTableContext';
 
-export function DataTableBody<TData>({ table }: { table: Table<TData> }) {
+export function DataTableBody() {
+  const { table } = useDataTable();
+
   return (
     <TableBody>
       {table.getRowModel().rows.map((row) => (
@@ -21,6 +24,4 @@ export function DataTableBody<TData>({ table }: { table: Table<TData> }) {
   );
 }
 
-export const MemoizedDataTableBody = memo(
-  DataTableBody,
-) as typeof DataTableBody;
+export const MemoizedDataTableBody = memo(DataTableBody);
