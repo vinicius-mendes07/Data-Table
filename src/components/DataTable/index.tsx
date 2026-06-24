@@ -65,9 +65,8 @@ export function DataTable<TData>({ data, columns }: IDataTableProps<TData>) {
                 key={column.id}
                 checked={column.getIsVisible()}
                 onCheckedChange={column.toggleVisibility}
-                disabled={!column.getCanHide()}
               >
-                {column.id}
+                {column.columnDef.meta?.nameInFilters}
               </DropdownMenuCheckboxItem>
             ) : null,
           )}

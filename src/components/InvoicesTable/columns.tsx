@@ -8,7 +8,7 @@ export const columns: ColumnDef<Invoice>[] = [
     header: '#',
     size: 80,
     enableResizing: false,
-    enableHiding: false,
+    meta: { nameInFilters: 'Order Number #' },
   },
   {
     accessorKey: 'paymentStatus',
@@ -18,13 +18,16 @@ export const columns: ColumnDef<Invoice>[] = [
         Payment Status
       </div>
     ),
+    meta: { nameInFilters: 'Payment Status' },
   },
   {
     accessorKey: 'paymentMethod',
     header: 'Payment Method',
+    meta: { nameInFilters: 'Payment Method' },
   },
   {
     accessorKey: 'totalAmount',
     header: 'Total',
+    meta: { nameInFilters: 'Total' },
   },
 ];
