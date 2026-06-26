@@ -1,6 +1,6 @@
 export interface Invoice {
   invoice: string;
   paymentStatus: string;
-  totalAmount: string;
+  totalAmount: number;
   paymentMethod: string;
 }
