@@ -8,33 +8,43 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
+import { DataTableColumnHeader } from '../DataTable/DataTableColumnHeader';
 
 export const columns: ColumnDef<Invoice>[] = [
   {
     accessorKey: 'invoice',
-    header: '#',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="#" />,
     size: 80,
     enableResizing: false,
     meta: { nameInFilters: 'Order Number #' },
   },
   {
     accessorKey: 'paymentStatus',
-    header: () => (
-      <div className="flex items-center gap-1">
-        <CreditCard className="size-4" />
-        Payment Status
-      </div>
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title={
+          <div className="flex items-center gap-1">
+            <CreditCard className="size-4" />
+            Payment Status
+          </div>
+        }
+      />
     ),
     meta: { nameInFilters: 'Payment Status' },
   },
   {
     accessorKey: 'paymentMethod',
-    header: 'Payment Method',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Payment Method" />
+    ),
     meta: { nameInFilters: 'Payment Method' },
   },
   {
     accessorKey: 'totalAmount',
-    header: 'Total',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Amount" />
+    ),
     meta: { nameInFilters: 'Total' },
   },
   {

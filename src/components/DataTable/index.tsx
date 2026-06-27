@@ -4,6 +4,7 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
+  getSortedRowModel,
   useReactTable,
   type ColumnDef,
 } from '@tanstack/react-table';
@@ -33,6 +34,7 @@ export function DataTable<TData>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
