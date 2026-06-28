@@ -12,7 +12,8 @@ export function InvoicesTable() {
     <DataTable
       data={invoices}
       columns={columns}
-      pagination={{ pageIndex: 0, pageSize: 2 }}
+      onSelectRow={(selectedRows) => console.log(selectedRows)}
+      pagination={{ pageIndex: 0, pageSize: 6 }}
     >
       <div className="mb-4 flex items-center gap-4">
         <DataTableTextFilter placeholder="Search..." column="paymentStatus" />

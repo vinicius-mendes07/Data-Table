@@ -9,7 +9,11 @@ export function DataTableBody() {
   return (
     <TableBody>
       {table.getRowModel().rows.map((row) => (
-        <TableRow key={row.id}>
+        <TableRow
+          key={row.id}
+          data-state={row.getIsSelected() && 'selected'}
+          onClick={row.getToggleSelectedHandler()}
+        >
           {row.getVisibleCells().map((cell) => (
             <TableCell
               key={cell.id}

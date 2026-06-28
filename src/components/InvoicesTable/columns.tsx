@@ -9,8 +9,37 @@ import {
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
 import { DataTableColumnHeader } from '../DataTable/DataTableColumnHeader';
+import { Checkbox } from '../ui/checkbox';
 
 export const columns: ColumnDef<Invoice>[] = [
+  {
+    id: 'select',
+    size: 80,
+    enableColumnFilter: false,
+    enableGlobalFilter: false,
+    enableHiding: false,
+    enableResizing: false,
+    enableSorting: false,
+    enableMultiSort: false,
+    header: ({ table }) => (
+      <Checkbox
+        className="mt-px"
+        checked={
+          table.getIsAllRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
+        }
+        onCheckedChange={() => table.toggleAllPageRowsSelected()}
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={row.getToggleSelectedHandler()}
+        className="mt-px"
+        disabled={!row.getCanSelect()}
+      />
+    ),
+  },
   {
     accessorKey: 'invoice',
     header: ({ column }) => <DataTableColumnHeader column={column} title="#" />,
